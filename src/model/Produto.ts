@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Categoria } from "./Categoria";
 
 @Entity()
 export class Produto {
@@ -6,8 +7,8 @@ export class Produto {
     id?: number;
     @Column()
     nome?: string;
-    @Column()
-    categoria?: string;
+    @ManyToOne(() => Categoria, (categoria) => categoria.produtos, {eager: true})
+    categoria?: Categoria;
     @Column("decimal")
     preco?: number;
   }
